@@ -18,64 +18,65 @@ def division(num_1, num_2):
     return num_1 / num_2
 
 
+def float_to_int(num):
+    if num.is_integer():
+        return int(num)
+    return num
+
+
+
 calc_dict = {'+': addition, '-': subtraction, '*': multiplication, '/': division}
 
 print('CALCULATOR\n')
 
 another_operation = True
-num_1, num_2 = int, int
-
 while another_operation:
     print('Available Operations:')
     for key in calc_dict.keys():
         print(key)
 
-    check_for_1st_number = True
-    check_for_2nd_number = True
-    check_for_operation = True
-
-    while check_for_1st_number:
-        # Input validation for 1st number
+    # Input 1st number (and validation)
+    while True:
         try:
-            num_1 = float(input("Enter the first number: "))
-            check_for_1st_number = False
+            num_1 = float(input("Enter the 1st number: "))
+            num_1 = float_to_int(num_1)
+            break
         except ValueError:
-            print(f"Error: Please enter valid first number")
+            print(f"Error: Please enter a valid 1st number")
 
-
-    while check_for_2nd_number:
-        # Input validation for 2nd number
+    # Input 2nd number (and validation)
+    while True:
         try:
-            num_2 = float(input("Enter the Second number: "))
-            check_for_2nd_number = False
-        except ValueError as e:
-            print(f"Error: Please enter valid second number")
+            num_2 = float(input("Enter the 2nd number: "))
+            num_2 = float_to_int(num_2)
+            break
+        except ValueError:
+            print(f"Error: Please enter a valid 2nd number")
 
-    while check_for_operation:
-        try:
+    while True:
             operation = input("\nChoose the operation (+, -, *, /): ")
+
             if operation not in calc_dict:
-                raise ValueError("Invalid operation. Please choose from '+', '-', '*', or '/'.")
-            check_for_operation = False
+                print("Error: Invalid operation. Please choose from +, -, *, /.")
+                continue
 
-            result = calc_dict[operation](num_1, num_2)
-            print(result)
+            try:
+                result = calc_dict[operation](num_1, num_2)
+                result = float_to_int(result)
+                print(f"Result: {result}")
+                break
+            except ZeroDivisionError as e:
+                print(f"Error: {e}")
 
-        except ZeroDivisionError as e:
-            print(f"Error: {e}")
-        except ValueError as e:
-            print(f"Error: {e}")
-        except Exception as e:
-            print(f"Unexpected error: {e}")
-
-
-    input_validation = True
     # Ask if the user wants to perform another operation
-    while input_validation:
+    while True:
         continue_calculation = input("\nDo you want to perform another operation? Enter 'yes' or 'no': ").lower()
         if continue_calculation in ['yes', 'no']:
-            input_validation = False
+            break
+        else:
+            print("Error: Please enter 'yes' or 'no'.")
 
-            if continue_calculation == 'no':
-                another_operation = False
+    if continue_calculation == 'no':
+        another_operation = False
+        print("\nExiting calculator. Goodbye!")
 
