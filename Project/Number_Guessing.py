@@ -11,13 +11,13 @@ def check_answer(guess, answer, turns, color_list):
     else:
         return turns
 
-    if guess > answer:
-        print(f"\nTOO {color_list[1]}HIGH{color_list[3]}. GUESS AGAIN.\n")
-        return turns - 1
-    elif guess < answer:
-        print(f"\nTOO {color_list[1]}LOW{color_list[3]}. GUESS AGAIN.\n")
-        return turns - 1
-    return turns  # Returns same value of turns if the guess is correct (If player guessed the number)
+    # if guess > answer:
+    #     print(f"\nTOO {color_list[1]}HIGH{color_list[3]}. GUESS AGAIN.\n")
+    #     return turns - 1
+    # elif guess < answer:
+    #     print(f"\nTOO {color_list[1]}LOW{color_list[3]}. GUESS AGAIN.\n")
+    #     return turns - 1
+    # return turns  # Returns same value of turns if the guess is correct (If player guessed the number)
 
 
 # Make function to set difficulty.
